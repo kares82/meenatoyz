@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="meta-title">Meenatoyz — Atelier de jeux</title>
+<meta id="meta-desc" name="description" content="Meenatoyz, atelier indépendant de jeux d'évasion. Découvrez AKASHIC et Le Dossier 101.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #17161a;
+    --ink-raised: #201e24;
+    --bone: #eee9df;
+    --bone-dim: #a8a49b;
+    --brass: #b3903f;
+    --brass-bright: #d4ac57;
+    --verdigris: #5c8c81;
+    --line: rgba(238,233,223,0.14);
+    --bg-glow-1: rgba(179,144,63,0.10);
+    --bg-glow-2: rgba(92,140,129,0.08);
+    --sheen: rgba(255,255,255,0.05);
+    --shadow: rgba(0,0,0,0.6);
+  }
+
+  html[data-theme="light"]{
+    --ink: #f3ede0;
+    --ink-raised: #e9e0cc;
+    --bone: #221f1a;
+    --bone-dim: #6f6a5c;
+    --brass: #8a6a2c;
+    --brass-bright: #a9832f;
+    --verdigris: #3f6b62;
+    --line: rgba(34,31,26,0.14);
+    --bg-glow-1: rgba(138,106,44,0.08);
+    --bg-glow-2: rgba(63,107,98,0.07);
+    --sheen: rgba(255,255,255,0.35);
+    --shadow: rgba(34,31,26,0.18);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, var(--bg-glow-1), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, var(--bg-glow-2), transparent 55%),
+      var(--ink);
+    color:var(--bone);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    transition:background-color 0.3s, color 0.3s;
+  }
+
+  a{ color:inherit; }
+
+  ::selection{ background:var(--brass); color:var(--ink); }
+
+  :focus-visible{
+    outline:2px solid var(--brass-bright);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- Lang / theme toggle ---------- */
+  .top-controls{
+    padding:22px 0 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  .lang-toggle, .theme-toggle{
+    display:flex;
+    align-items:center;
+  }
+
+  .lang-toggle button, .theme-toggle button{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    background:none;
+    border:1px solid var(--line);
+    color:var(--bone-dim);
+    padding:6px 12px;
+    border-radius:20px;
+    cursor:pointer;
+    transition:border-color 0.25s, color 0.25s;
+  }
+
+  .lang-toggle button:hover, .theme-toggle button:hover{
+    border-color:var(--brass);
+    color:var(--bone);
+  }
+
+  .lang-toggle .sep, .theme-toggle .sep{
+    color:var(--bone-dim);
+    opacity:0.4;
+    padding:0 2px;
+  }
+
+  .lang-toggle button.active, .theme-toggle button.active{
+    color:var(--brass-bright);
+    border-color:var(--brass);
+  }
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    padding:50px 0 70px;
+    border-bottom:1px solid var(--line);
+  }
+
+  .wordmark{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size:clamp(48px, 9vw, 84px);
+    letter-spacing:-0.01em;
+    line-height:0.95;
+    margin:0 0 20px;
+    background:linear-gradient(135deg, var(--bone) 40%, var(--brass-bright) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--brass-bright);
+    margin-bottom:18px;
+  }
+
+  .tagline{
+    font-size:18px;
+    line-height:1.6;
+    color:var(--bone-dim);
+    max-width:46ch;
+  }
+
+  /* ---------- Cabinet / exhibits ---------- */
+  main{
+    padding:64px 0 40px;
+  }
+
+  .cabinet-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:32px;
+  }
+  .cabinet-label::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  .exhibits{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+  }
+
+  .exhibit{
+    position:relative;
+    background:linear-gradient(160deg, var(--ink-raised), var(--ink) 75%);
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:30px 26px 26px;
+    display:flex;
+    flex-direction:column;
+    min-height:300px;
+    transition:transform 0.35s cubic-bezier(.2,.7,.3,1), border-color 0.35s, box-shadow 0.35s;
+  }
+
+  .exhibit::before{
+    /* glass sheen */
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(115deg, var(--sheen) 0%, transparent 30%);
+    pointer-events:none;
+    border-radius:2px;
+  }
+
+  @media (hover:hover){
+    .exhibit:hover{
+      transform:translateY(-4px);
+      border-color:var(--exhibit-accent, var(--brass));
+      box-shadow:0 20px 40px -20px var(--shadow), 0 0 0 1px var(--exhibit-accent, var(--brass)) inset;
+    }
+  }
+
+  .exhibit .catalog{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    color:var(--exhibit-accent, var(--brass));
+  }
+
+  .exhibit h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:30px;
+    margin:12px 0 6px;
+    color:var(--bone);
+  }
+
+  .exhibit .tag{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--exhibit-accent, var(--brass));
+    border:1px solid var(--exhibit-accent, var(--brass));
+    border-radius:20px;
+    padding:3px 10px;
+    margin-bottom:16px;
+    width:fit-content;
+    opacity:0.85;
+  }
+
+  .exhibit p.desc{
+    font-size:14.5px;
+    line-height:1.6;
+    color:var(--bone-dim);
+    flex:1;
+    margin:0 0 22px;
+  }
+
+  .exhibit .play{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.06em;
+    text-decoration:none;
+    color:var(--bone);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    transition:gap 0.25s, color 0.25s;
+  }
+
+  .exhibit .play:hover{
+    gap:14px;
+    color:var(--exhibit-accent, var(--brass-bright));
+  }
+
+  .exhibit.akashic{ --exhibit-accent: var(--verdigris); }
+  .exhibit.dossier{ --exhibit-accent: var(--brass-bright); }
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top:70px;
+    padding:26px 0 60px;
+    border-top:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.05em;
+    color:var(--bone-dim);
+  }
+
+  @media (max-width:640px){
+    .exhibits{ grid-template-columns:1fr; }
+    header.hero{ padding:60px 0 44px; }
+    footer{ flex-direction:column; gap:8px; align-items:flex-start; }
+    .top-controls{ justify-content:center; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="top-controls">
+    <div class="theme-toggle">
+      <button id="btn-light" onclick="setTheme('light')" data-fr="Clair" data-en="Light">Clair</button>
+      <span class="sep">/</span>
+      <button id="btn-dark" onclick="setTheme('dark')" data-fr="Sombre" data-en="Dark">Sombre</button>
+    </div>
+    <div class="lang-toggle">
+      <button id="btn-fr" onclick="setLang('fr')">FR</button>
+      <span class="sep">/</span>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="eyebrow" data-fr="Meenatoyz — atelier de jeux" data-en="Meenatoyz — game studio">Meenatoyz — atelier de jeux</div>
+    <h1 class="wordmark">Meenatoyz</h1>
+    <p class="tagline"
+       data-fr="On construit de petits mondes qu'on a envie d'explorer — des jeux courts, curieux, pensés pour qu'on y revienne."
+       data-en="We build small worlds worth stepping into — short, curious games made to pull you back in.">
+      On construit de petits mondes qu'on a envie d'explorer —
+      des jeux courts, curieux, pensés pour qu'on y revienne.
+    </p>
+  </header>
+
+  <main>
+    <div class="cabinet-label" data-fr="Le cabinet" data-en="The cabinet">Le cabinet</div>
+
+    <div class="exhibits">
+
+      <article class="exhibit akashic">
+        <div class="catalog" data-fr="Pièce N&deg;01" data-en="Item No.01">Pièce N&deg;01</div>
+        <h2>AKASHIC</h2>
+        <span class="tag" data-fr="Jeu d'évasion" data-en="Escape game">Jeu d'évasion</span>
+        <p class="desc"
+           data-fr="Un jeu d'énigmes et d'évasion. Observez, déduisez, avancez — la sortie se mérite."
+           data-en="A puzzle and escape game. Observe, deduce, advance — the way out has to be earned.">
+          Un jeu d'énigmes et d'évasion. Observez, déduisez, avancez —
+          la sortie se mérite.
+        </p>
+        <a class="play" href="https://akashic-9oe.pages.dev/game" target="_blank" rel="noopener">
+          <span data-fr="Jouer" data-en="Play">Jouer</span> &nbsp;→
+        </a>
+      </article>
+
+      <article class="exhibit dossier">
+        <div class="catalog" data-fr="Pièce N&deg;02" data-en="Item No.02">Pièce N&deg;02</div>
+        <h2>Le Dossier 101</h2>
+        <span class="tag" data-fr="Jeu d'évasion — France" data-en="Escape game — France">Jeu d'évasion — France</span>
+        <p class="desc"
+           data-fr="101 départements à instruire, un dossier à constituer, une sortie à trouver. Répondez juste, ou restez."
+           data-en="101 French départements to investigate, a case file to build, a way out to find. Answer well — or stay.">
+          101 départements à instruire, un dossier à constituer,
+          une sortie à trouver. Répondez juste, ou restez.
+        </p>
+        <a class="play" href="https://le-dossier-101.pages.dev" target="_blank" rel="noopener">
+          <span data-fr="Jouer" data-en="Play">Jouer</span> &nbsp;→
+        </a>
+      </article>
+
+    </div>
+  </main>
+
+  <footer>
+    <span data-fr="Meenatoyz — atelier indépendant" data-en="Meenatoyz — independent studio">Meenatoyz — atelier indépendant</span>
+    <span>&copy; 2026</span>
+  </footer>
+</div>
+
+<script>
+  const titles = {
+    fr: "Meenatoyz — Atelier de jeux",
+    en: "Meenatoyz — Game Studio"
+  };
+  const descs = {
+    fr: "Meenatoyz, atelier indépendant de jeux d'évasion. Découvrez AKASHIC et Le Dossier 101.",
+    en: "Meenatoyz, an independent escape-game studio. Discover AKASHIC and Le Dossier 101."
+  };
+
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-fr]').forEach(el => {
+      el.textContent = el.getAttribute('data-' + lang);
+    });
+    document.getElementById('meta-title').textContent = titles[lang];
+    document.getElementById('meta-desc').setAttribute('content', descs[lang]);
+    document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('meenatoyz-lang', lang);
+  }
+
+  function setTheme(theme){
+    document.documentElement.setAttribute('data-theme', theme);
+    document.getElementById('btn-light').classList.toggle('active', theme === 'light');
+    document.getElementById('btn-dark').classList.toggle('active', theme === 'dark');
+    localStorage.setItem('meenatoyz-theme', theme);
+  }
+
+  // Init theme: saved choice, else system preference, else dark
+  const savedTheme = localStorage.getItem('meenatoyz-theme');
+  const systemPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+  setTheme(savedTheme || (systemPrefersLight ? 'light' : 'dark'));
+
+  // Init: browser language preference, fallback to French
+  const saved = null; // no localStorage reliance for first paint in case it's blocked
+  const browserLang = navigator.language && navigator.language.startsWith('en') ? 'en' : 'fr';
+  setLang(browserLang);
+</script>
+
+</body>
+</html>
