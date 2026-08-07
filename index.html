@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title id="meta-title">Meenatoyz — Atelier de jeux</title>
-<meta id="meta-desc" name="description" content="Meenatoyz, atelier indépendant de jeux d'évasion. Découvrez AKASHIC et Le Dossier 101.">
+<meta id="meta-desc" name="description" content="Meenatoyz, atelier indépendant de jeux — AKASHIC, Le Dossier 101, Balik Kampung.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -16,6 +16,7 @@
     --brass: #b3903f;
     --brass-bright: #d4ac57;
     --verdigris: #5c8c81;
+    --terracotta: #b3603f;
     --line: rgba(238,233,223,0.14);
     --bg-glow-1: rgba(179,144,63,0.10);
     --bg-glow-2: rgba(92,140,129,0.08);
@@ -24,18 +25,19 @@
   }
 
   html[data-theme="light"]{
-    --ink: #f3ede0;
-    --ink-raised: #e9e0cc;
-    --bone: #221f1a;
+    --ink: #e7ddc9;
+    --ink-raised: #ddd1b6;
+    --bone: #2a2620;
     --bone-dim: #6f6a5c;
     --brass: #8a6a2c;
     --brass-bright: #a9832f;
     --verdigris: #3f6b62;
-    --line: rgba(34,31,26,0.14);
-    --bg-glow-1: rgba(138,106,44,0.08);
-    --bg-glow-2: rgba(63,107,98,0.07);
-    --sheen: rgba(255,255,255,0.35);
-    --shadow: rgba(34,31,26,0.18);
+    --terracotta: #a3502f;
+    --line: rgba(34,31,26,0.16);
+    --bg-glow-1: rgba(138,106,44,0.07);
+    --bg-glow-2: rgba(63,107,98,0.06);
+    --sheen: rgba(34,31,26,0.03);
+    --shadow: rgba(34,31,26,0.16);
   }
 
   *{ box-sizing:border-box; }
@@ -173,7 +175,7 @@
 
   .exhibits{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
     gap:22px;
   }
 
@@ -266,6 +268,63 @@
 
   .exhibit.akashic{ --exhibit-accent: var(--verdigris); }
   .exhibit.dossier{ --exhibit-accent: var(--brass-bright); }
+  .exhibit.balikkampung{ --exhibit-accent: var(--terracotta); }
+
+  /* ---------- Contact ---------- */
+  .contact{
+    margin-top:60px;
+    padding:36px 30px;
+    background:linear-gradient(160deg, var(--ink-raised), var(--ink) 75%);
+    border:1px solid var(--line);
+    border-radius:2px;
+  }
+
+  .contact h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0 0 8px;
+    color:var(--bone);
+  }
+
+  .contact p{
+    font-size:14px;
+    line-height:1.6;
+    color:var(--bone-dim);
+    margin:0 0 20px;
+    max-width:50ch;
+  }
+
+  .whatsapp-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.04em;
+    text-decoration:none;
+    color:var(--ink);
+    background:var(--brass-bright);
+    padding:11px 20px;
+    border-radius:24px;
+    transition:transform 0.2s, opacity 0.2s;
+  }
+
+  .whatsapp-btn:hover{
+    transform:translateY(-2px);
+    opacity:0.92;
+  }
+
+  .company-details{
+    margin-top:22px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.04em;
+    color:var(--bone-dim);
+    line-height:1.8;
+  }
 
   /* ---------- Footer ---------- */
   footer{
@@ -355,6 +414,36 @@
         </a>
       </article>
 
+      <article class="exhibit balikkampung">
+        <div class="catalog" data-fr="Pièce N&deg;03" data-en="Item No.03">Pièce N&deg;03</div>
+        <h2>Balik Kampung</h2>
+        <span class="tag" data-fr="Jeu narratif — Malaisie" data-en="Narrative game — Malaysia">Jeu narratif — Malaisie</span>
+        <p class="desc"
+           data-fr="Le chemin du retour au pays natal. Un jeu sur la mémoire, le foyer, et ce qu'on retrouve en rentrant."
+           data-en="The road back home. A game about memory, belonging, and what's waiting when you return.">
+          Le chemin du retour au pays natal. Un jeu sur la mémoire,
+          le foyer, et ce qu'on retrouve en rentrant.
+        </p>
+        <a class="play" href="https://balik-kampung-a01.pages.dev/" target="_blank" rel="noopener">
+          <span data-fr="Jouer" data-en="Play">Jouer</span> &nbsp;→
+        </a>
+      </article>
+
+    </div>
+
+    <div class="contact">
+      <h3 data-fr="Envie de collaborer ?" data-en="Want to collaborate?">Envie de collaborer ?</h3>
+      <p data-fr="Studios, créateurs, écoles, partenaires — on est toujours curieux de nouvelles collaborations. Écrivez-nous."
+         data-en="Studios, creators, schools, partners — always curious about new collaborations. Reach out.">
+        Studios, créateurs, écoles, partenaires — on est toujours curieux
+        de nouvelles collaborations. Écrivez-nous.
+      </p>
+      <a class="whatsapp-btn" href="https://wa.me/60177066838" target="_blank" rel="noopener">
+        <span data-fr="WhatsApp — +6017 7066838" data-en="WhatsApp — +6017 7066838">WhatsApp — +6017 7066838</span>
+      </a>
+      <div class="company-details">
+        Meena Toyz Malaysia · Reg. PG0506498-X
+      </div>
     </div>
   </main>
 
@@ -370,8 +459,8 @@
     en: "Meenatoyz — Game Studio"
   };
   const descs = {
-    fr: "Meenatoyz, atelier indépendant de jeux d'évasion. Découvrez AKASHIC et Le Dossier 101.",
-    en: "Meenatoyz, an independent escape-game studio. Discover AKASHIC and Le Dossier 101."
+    fr: "Meenatoyz, atelier indépendant de jeux — AKASHIC, Le Dossier 101, Balik Kampung.",
+    en: "Meenatoyz, an independent game studio — AKASHIC, Le Dossier 101, Balik Kampung."
   };
 
   function setLang(lang){
