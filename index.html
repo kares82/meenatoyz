@@ -116,19 +116,35 @@
 
   /* ---------- Hero ---------- */
   header.hero{
-    padding:50px 0 70px;
+    padding:60px 0 76px;
     border-bottom:1px solid var(--line);
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
   }
 
   .wordmark{
     font-family:'Fraunces', serif;
     font-optical-sizing:auto;
-    font-weight:600;
-    font-size:clamp(48px, 9vw, 84px);
-    letter-spacing:-0.01em;
-    line-height:0.95;
-    margin:0 0 20px;
-    background:linear-gradient(135deg, var(--bone) 40%, var(--brass-bright) 100%);
+    font-weight:700;
+    font-size:clamp(44px, 11vw, 108px);
+    letter-spacing:0.01em;
+    line-height:0.92;
+    margin:0 0 24px;
+    text-transform:uppercase;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:0.28em;
+  }
+
+  .wordmark .w1{
+    color:var(--bone);
+  }
+
+  .wordmark .w2{
+    background:linear-gradient(135deg, var(--brass-bright) 20%, var(--brass) 100%);
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
@@ -140,7 +156,7 @@
     letter-spacing:0.16em;
     text-transform:uppercase;
     color:var(--brass-bright);
-    margin-bottom:18px;
+    margin-bottom:22px;
   }
 
   .tagline{
@@ -148,6 +164,7 @@
     line-height:1.6;
     color:var(--bone-dim);
     max-width:46ch;
+    margin:0 auto;
   }
 
   /* ---------- Cabinet / exhibits ---------- */
@@ -247,6 +264,20 @@
     margin:0 0 22px;
   }
 
+  .exhibit.akashic{ --exhibit-accent: var(--verdigris); }
+  .exhibit.dossier{ --exhibit-accent: var(--brass-bright); }
+  .exhibit.balikkampung{ --exhibit-accent: var(--terracotta); }
+
+  /* ---------- Per-game QR chip ---------- */
+  .play-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+  }
+
   .exhibit .play{
     font-family:'JetBrains Mono', monospace;
     font-size:12.5px;
@@ -256,8 +287,6 @@
     display:inline-flex;
     align-items:center;
     gap:8px;
-    padding-top:14px;
-    border-top:1px solid var(--line);
     transition:gap 0.25s, color 0.25s;
   }
 
@@ -266,9 +295,21 @@
     color:var(--exhibit-accent, var(--brass-bright));
   }
 
-  .exhibit.akashic{ --exhibit-accent: var(--verdigris); }
-  .exhibit.dossier{ --exhibit-accent: var(--brass-bright); }
-  .exhibit.balikkampung{ --exhibit-accent: var(--terracotta); }
+  .qr-chip{
+    flex:0 0 auto;
+    width:44px;
+    height:44px;
+    border-radius:3px;
+    overflow:hidden;
+    background:#f2ead6;
+    border:1px solid var(--line);
+  }
+
+  .qr-chip img{
+    display:block;
+    width:100%;
+    height:100%;
+  }
 
   /* ---------- Contact ---------- */
   .contact{
@@ -295,25 +336,81 @@
     max-width:50ch;
   }
 
-  .whatsapp-btn{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
+  .contact-form{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    max-width:480px;
+  }
+
+  .contact-form label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    margin-bottom:6px;
+    display:block;
+  }
+
+  .contact-form input,
+  .contact-form textarea{
+    width:100%;
+    background:var(--ink);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:11px 14px;
+    color:var(--bone);
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    transition:border-color 0.2s;
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus{
+    outline:none;
+    border-color:var(--brass-bright);
+  }
+
+  .contact-form textarea{
+    resize:vertical;
+    min-height:100px;
+  }
+
+  .contact-form button{
+    align-self:flex-start;
     font-family:'JetBrains Mono', monospace;
     font-size:13px;
     letter-spacing:0.04em;
-    text-decoration:none;
     color:var(--ink);
     background:var(--brass-bright);
-    padding:11px 20px;
+    border:none;
+    padding:11px 24px;
     border-radius:24px;
+    cursor:pointer;
     transition:transform 0.2s, opacity 0.2s;
   }
 
-  .whatsapp-btn:hover{
+  .contact-form button:hover{
     transform:translateY(-2px);
     opacity:0.92;
   }
+
+  .contact-form button:disabled{
+    opacity:0.5;
+    cursor:not-allowed;
+    transform:none;
+  }
+
+  .form-status{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    margin-top:4px;
+    min-height:16px;
+  }
+
+  .form-status.success{ color:var(--verdigris); }
+  .form-status.error{ color:var(--terracotta); }
 
   .company-details{
     margin-top:22px;
@@ -345,6 +442,8 @@
     header.hero{ padding:60px 0 44px; }
     footer{ flex-direction:column; gap:8px; align-items:flex-start; }
     .top-controls{ justify-content:center; }
+    .try-it{ flex-direction:column; text-align:center; }
+    .try-it .try-text p{ max-width:none; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -370,7 +469,7 @@
 
   <header class="hero">
     <div class="eyebrow" data-fr="Meenatoyz — atelier de jeux" data-en="Meenatoyz — game studio">Meenatoyz — atelier de jeux</div>
-    <h1 class="wordmark">Meenatoyz</h1>
+    <h1 class="wordmark"><span class="w1">Meena</span><span class="w2">Toyz</span></h1>
     <p class="tagline"
        data-fr="On construit de petits mondes qu'on a envie d'explorer — des jeux courts, curieux, pensés pour qu'on y revienne."
        data-en="We build small worlds worth stepping into — short, curious games made to pull you back in.">
@@ -394,9 +493,12 @@
           Un jeu d'évasion. Observez, déduisez, avancez —
           la sortie se mérite.
         </p>
-        <a class="play" href="https://akashic-9oe.pages.dev/game" target="_blank" rel="noopener">
-          <span data-fr="Jouer" data-en="Play">Jouer</span> &nbsp;→
-        </a>
+        <div class="play-row">
+          <a class="play" href="https://akashic-9oe.pages.dev/game" target="_blank" rel="noopener">
+            <span data-fr="Jouer" data-en="Play">Jouer</span> &nbsp;→
+          </a>
+          <div class="qr-chip"><img src="data:image/png;base64,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" alt="QR — AKASHIC"></div>
+        </div>
       </article>
 
       <article class="exhibit dossier">
@@ -409,9 +511,12 @@
           101 départements à instruire, un dossier à constituer,
           une sortie à trouver. Répondez juste, ou restez.
         </p>
-        <a class="play" href="https://le-dossier-101.pages.dev" target="_blank" rel="noopener">
-          <span data-fr="Jouer" data-en="Play">Jouer</span> &nbsp;→
-        </a>
+        <div class="play-row">
+          <a class="play" href="https://le-dossier-101.pages.dev" target="_blank" rel="noopener">
+            <span data-fr="Jouer" data-en="Play">Jouer</span> &nbsp;→
+          </a>
+          <div class="qr-chip"><img src="data:image/png;base64,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" alt="QR — Le Dossier 101"></div>
+        </div>
       </article>
 
       <article class="exhibit balikkampung">
@@ -424,9 +529,12 @@
           Le chemin du retour au pays natal. Un jeu sur la mémoire,
           le foyer, et ce qu'on retrouve en rentrant.
         </p>
-        <a class="play" href="https://balik-kampung-a01.pages.dev/" target="_blank" rel="noopener">
-          <span data-fr="Jouer" data-en="Play">Jouer</span> &nbsp;→
-        </a>
+        <div class="play-row">
+          <a class="play" href="https://balik-kampung-a01.pages.dev/" target="_blank" rel="noopener">
+            <span data-fr="Jouer" data-en="Play">Jouer</span> &nbsp;→
+          </a>
+          <div class="qr-chip"><img src="data:image/png;base64,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" alt="QR — Balik Kampung"></div>
+        </div>
       </article>
 
     </div>
@@ -438,9 +546,33 @@
         Studios, créateurs, écoles, partenaires — on est toujours curieux
         de nouvelles collaborations. Écrivez-nous.
       </p>
-      <a class="whatsapp-btn" href="https://wa.me/60177066838" target="_blank" rel="noopener">
-        <span data-fr="WhatsApp — +6017 7066838" data-en="WhatsApp — +6017 7066838">WhatsApp — +6017 7066838</span>
-      </a>
+      <form class="contact-form" id="contact-form">
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div>
+          <label for="cf-email" data-fr="Votre e-mail" data-en="Your email">Votre e-mail</label>
+          <input type="email" id="cf-email" name="email" required placeholder="vous@exemple.com">
+        </div>
+
+        <div>
+          <label for="cf-subject" data-fr="Sujet" data-en="Subject">Sujet</label>
+          <input type="text" id="cf-subject" name="subject" required
+                 data-fr-placeholder="Collaboration, question, autre..."
+                 data-en-placeholder="Collaboration, question, other..."
+                 placeholder="Collaboration, question, autre...">
+        </div>
+
+        <div>
+          <label for="cf-message" data-fr="Votre message" data-en="Your message">Votre message</label>
+          <textarea id="cf-message" name="message" required
+                    data-fr-placeholder="Dites-nous en plus..."
+                    data-en-placeholder="Tell us more..."
+                    placeholder="Dites-nous en plus..."></textarea>
+        </div>
+
+        <button type="submit" id="cf-submit" data-fr="Envoyer" data-en="Send">Envoyer</button>
+        <div class="form-status" id="cf-status"></div>
+      </form>
       <div class="company-details"
            data-fr="Meena Toyz Malaysia (Malaisie) · N° d'enregistrement PG0506498-X"
            data-en="Meena Toyz Malaysia · Reg. PG0506498-X">
@@ -470,12 +602,65 @@
     document.querySelectorAll('[data-fr]').forEach(el => {
       el.textContent = el.getAttribute('data-' + lang);
     });
+    document.querySelectorAll('[data-fr-placeholder]').forEach(el => {
+      el.setAttribute('placeholder', el.getAttribute('data-' + lang + '-placeholder'));
+    });
     document.getElementById('meta-title').textContent = titles[lang];
     document.getElementById('meta-desc').setAttribute('content', descs[lang]);
     document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
     localStorage.setItem('meenatoyz-lang', lang);
   }
+
+  // ---------- Contact form submission (Cloudflare Pages Function + Resend) ----------
+  const contactForm = document.getElementById('contact-form');
+  const cfStatus = document.getElementById('cf-status');
+  const cfSubmit = document.getElementById('cf-submit');
+
+  const statusMessages = {
+    sending: { fr: "Envoi en cours…", en: "Sending…" },
+    success: { fr: "Message envoyé — merci, on vous répond vite.", en: "Message sent — thanks, we'll reply soon." },
+    error:   { fr: "Échec de l'envoi. Réessayez, ou écrivez-nous directement.", en: "Send failed. Please try again." }
+  };
+
+  function currentLang(){
+    return document.getElementById('btn-fr').classList.contains('active') ? 'fr' : 'en';
+  }
+
+  contactForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const lang = currentLang();
+    cfSubmit.disabled = true;
+    cfStatus.className = 'form-status';
+    cfStatus.textContent = statusMessages.sending[lang];
+
+    const formData = new FormData(contactForm);
+    const payload = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Unknown error');
+      }
+
+      cfStatus.className = 'form-status success';
+      cfStatus.textContent = statusMessages.success[lang];
+      contactForm.reset();
+    } catch (err) {
+      console.error(err);
+      cfStatus.className = 'form-status error';
+      cfStatus.textContent = statusMessages.error[lang];
+    } finally {
+      cfSubmit.disabled = false;
+    }
+  });
 
   function setTheme(theme){
     document.documentElement.setAttribute('data-theme', theme);
