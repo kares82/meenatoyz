@@ -452,12 +452,31 @@
     padding:26px 0 60px;
     border-top:1px solid var(--line);
     display:flex;
+    flex-wrap:wrap;
     justify-content:space-between;
     align-items:center;
     font-family:'JetBrains Mono', monospace;
     font-size:11px;
     letter-spacing:0.05em;
     color:var(--bone-dim);
+  }
+
+  .footer-sister{
+    flex-basis:100%;
+    margin-top:14px;
+    color:var(--bone-dim);
+  }
+
+  .footer-sister a{
+    color:inherit;
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    transition:color 0.25s, border-color 0.25s;
+  }
+
+  .footer-sister a:hover{
+    color:var(--brass-bright);
+    border-color:var(--brass-bright);
   }
 
   @media (max-width:640px){
@@ -668,6 +687,9 @@
   <footer>
     <span data-fr="Meenatoyz — atelier indépendant" data-en="Meenatoyz — independent studio">Meenatoyz — atelier indépendant</span>
     <span>&copy; 2026</span>
+    <span class="footer-sister">
+      <span data-fr="Applications & outils IA de notre studio frère — " data-en="Apps & AI tools from our sister studio — ">Applications &amp; outils IA de notre studio frère — </span><a href="https://red-triangle.net" target="_blank" rel="noopener">Red Triangle ↗</a>
+    </span>
   </footer>
 </div>
 
